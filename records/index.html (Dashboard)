@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Scratch Records Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:20px; background:#f9f9f9; }
+    h1 { margin-bottom:10px; }
+    table { border-collapse: collapse; width: 100%; margin-top:20px; }
+    th, td { border:1px solid #ccc; padding:8px; text-align:left; font-size:14px; }
+    th { background:#eee; }
+    .summary { margin-top:15px; font-weight:bold; }
+  </style>
+</head>
+<body>
+  <h1>Scratch Records Dashboard</h1>
+  <div id="summary" class="summary"></div>
+  <table id="recordsTable">
+    <thead>
+      <tr>
+        <th>Bill No</th>
+        <th>Gift</th>
+        <th>Used At</th>
+        <th>Phone</th>
+        <th>Device ID</th>
+      </tr>
+    </thead>
+    <tbody id="recordsBody"></tbody>
+  </table>
+
+<script>
+const JSON_URL = "https://raw.githubusercontent.com/YOURUSERNAME/Scarthrecords/main/records/bills.json";
+
+async function loadData() {
+  try {
+    let res = await fetch(JSON_URL + "?_=" + Date.now());
+    let data = await res.json();
+    let tbody = document.getElementById("recordsBody");
+    tbody.innerHTML = "";
+
+    let gifts = {};
+
+    Object.keys(data).forEach(billNo => {
+      let r = data[billNo];
+      gifts[r.gift] = (gifts[r.gift]||0)+1;
+
+      let tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${billNo}</td>
+        <td>${r.gift}</td>
+        <td>${r.usedAt}</td>
+        <td>${r.phone||""}</td>
+        <td>${r.deviceId||""}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Summary
+    let sumDiv = document.getElementById("summary");
+    let txt = "Total: " + Object.keys(data).length + " records";
+    txt += " | Gifts: " + Object.entries(gifts).map(([g,c]) => `${g} = ${c}`).join(", ");
+    sumDiv.innerText = txt;
+
+  } catch(e) {
+    console.error("Error loading JSON:", e);
+  }
+}
+loadData();
+setInterval(loadData, 60000); // auto-refresh every 1 min
+</script>
+</body>
+</html>
