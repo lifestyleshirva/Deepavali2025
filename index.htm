@@ -218,15 +218,11 @@ function updateWhatsAppButton(randomGift,couponCode,dateTime){
 function startCelebrationAndAfterBox(){
     const billAmt=parseFloat(document.getElementById('billAmt').value.trim());
     let gifts=[];
-    if(billAmt>=1000 && billAmt<1500) gifts=['💰30 ₹ Cashback','💰40 ₹ Cashback','💰50 ₹ Cashback'];
-    else if(billAmt>=1500 && billAmt<2000) gifts=['💰20 ₹ Cashback','💰30 ₹ Cashback','💰40 ₹ Cashback','💰50 ₹ Cashback'];
-    else if(billAmt>=2000 && billAmt<2500) gifts=['💰30 ₹ Cashback','💰40 ₹ Cashback','💰50 ₹ Cashback','💰60 ₹ Cashback'];
-    else if(billAmt>=2500 && billAmt<3000) gifts=['💰40 ₹ Cashback','💰50 ₹ Cashback','💰70 ₹ Cashback','💰80 ₹ Cashback'];
-    else if(billAmt>=3000 && billAmt<3500) gifts=['💰50 ₹ Cashback','💰70 ₹ Cashback','💰80 ₹ Cashback','💰90 ₹ Cashback'];
-    else if(billAmt>=3500 && billAmt<4000) gifts=['💰60 ₹ Cashback','💰80 ₹ Cashback','💰90 ₹ Cashback','💰100 ₹ Cashback'];
-    else if(billAmt>=4000 && billAmt<4500) gifts=['💰70 ₹ Cashback','💰90 ₹ Cashback','💰100 ₹ Cashback','💰120 ₹ Cashback'];
-    else if(billAmt>=4500 && billAmt<5000) gifts=['💰80 ₹ Cashback','💰100 ₹ Cashback','💰120 ₹ Cashback','💰150 ₹ Cashback'];
-    else if(billAmt>=5000) gifts=['💰90 ₹ Cashback','💰100 ₹ Cashback','💰150 ₹ Cashback','💰200 ₹ Cashback'];
+    if(billAmt>=1000 && billAmt<1500) gifts=['SNACKS PLATE 1P'];
+    else if(billAmt>=1500 && billAmt<2000) gifts=['SNACKS PLATE 2P','DECORATIVE PLATE 1P','MEALS PLATE 1P','💰50 ₹ Cashback'];
+    else if(billAmt>=2000 && billAmt<3500) gifts=['ICE CREAM BOWL SET 1P','DECORATIVE PLATE 1P','MEASL PLATE 1P','💰100 ₹ Cashback'];
+    else if(billAmt>=3500 && billAmt<4999) gifts=['TEE SET 1P','ICE CREAM BOWL 1P','MEAL PLATE 2P','💰100 ₹ Cashback','MEAL PLATE 2P'];
+    else if(billAmt>=5000) gifts=['TEE SET 1P','ICE CREAM BOWL 1P','MEALS PLATE 2P','💰200 ₹ Cashback','💰300 ₹ Cashback,'MEALS PLATE 2P'];
     revealFull(gifts[Math.floor(Math.random()*gifts.length)]);
 }
 function revealFull(randomGift){
